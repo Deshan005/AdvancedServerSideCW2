@@ -53,7 +53,7 @@ function UserBlogs() {
       <h2 className="text-2xl font-bold text-center mb-6">Your Blogs</h2>
 
 
-        <div className="text-center">
+        <div className="text-center pb-10">
           <p className="mb-4 text-gray-600">{error}</p>
           <button
             onClick={() => navigate('/create')}
