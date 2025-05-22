@@ -34,8 +34,8 @@ project-root/
 ###  Clone the Repository
 
 ```bash
-git clone https://github.com/Lasith456/advancedServerSideCW2.git
-cd advancedServerSideCW2
+git clone https://github.com/Deshan005/AdvancedServerSideCW2
+cd AdvancedServerSideCW2
 ```
 
 ---
@@ -113,7 +113,7 @@ cp .env.example .env
 ## 👨‍💻 Author
 
 - **Deshan Wijethunga**  
-- GitHub: [@LasithViduranga](https://github.com/Lasith456)
+- GitHub: [@Deshan005](https://github.com/Deshan005)
 
 ---
 
