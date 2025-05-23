@@ -6,30 +6,33 @@ import { Link, useNavigate } from 'react-router-dom';
 function UserBlogs() {
   const [blogs, setBlogs] = useState([]);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const fetchBlogs = () => {
     const token = Cookies.get('token');
-    axios.get(`http://localhost:3000/blog/personalblogs`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
+    axios
+      .get(`http://localhost:3000/blog/personalblogs`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((res) => {
         setBlogs(res.data.data);
+        setError('');
       })
       .catch((err) => {
         setError(err.response?.data?.message || 'Failed to fetch blogs.');
-      });
+      })
+      .finally(() => setLoading(false));
   };
 
   useEffect(() => {
     fetchBlogs();
-    console.log(blogs)
   }, []);
 
   const handleDelete = async (blogId) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this blog?");
+    const confirmDelete = window.confirm('Are you sure you want to delete this blog?');
     if (!confirmDelete) return;
 
     try {
@@ -40,31 +43,32 @@ function UserBlogs() {
         },
       });
       alert('Blog deleted successfully.');
-      fetchBlogs(); 
+      fetchBlogs();
     } catch (err) {
       alert(err.response?.data?.message || 'Failed to delete blog.');
     }
   };
 
- 
-
   return (
     <div className="max-w-7xl mx-auto py-6 px-4">
       <h2 className="text-2xl font-bold text-center mb-6">Your Blogs</h2>
 
+      <div className="text-center pb-6">
+        <button
+          onClick={() => navigate('/create')}
+          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition duration-200"
+        >
+          + New Blog
+        </button>
+      </div>
 
-        <div className="text-center pb-10">
-          <p className="mb-4 text-gray-600">{error}</p>
-          <button
-            onClick={() => navigate('/create')}
-            className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-          >
-            + New Blog
-          </button>
-        </div>
-
-
-      {blogs.length > 0 && (
+      {loading ? (
+        <p className="text-center text-gray-500">Loading your blogs...</p>
+      ) : error ? (
+        <p className="text-center text-red-600">{error}</p>
+      ) : blogs.length === 0 ? (
+        <p className="text-center text-gray-600">You haven’t written any blogs yet.</p>
+      ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {blogs.map((blog) => (
             <div key={blog.id} className="bg-white shadow-md rounded-lg overflow-hidden">

@@ -8,6 +8,8 @@ function Login() {
   const [password, setPassword] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -24,14 +26,15 @@ function Login() {
       const user = response.data?.user?.name;
 
       if (user) {
-        alert("Hi " + user+" Welcome back!");
-      }else{
-        alert("something went wrong")
+        alert("Hi " + user + ", welcome back!");
+      } else {
+        alert("Something went wrong.");
       }
+
       Cookies.set('token', response.data.token, {
-        expires: 1,           // Expires in 7 days
-        secure: true,         // Send over HTTPS only
-        sameSite: 'strict',   // CSRF protection
+        expires: 1,
+        secure: true,
+        sameSite: 'strict',
       });
       Cookies.set('userEmail', response.data.user.email);
 
@@ -39,7 +42,6 @@ function Login() {
     } catch (error) {
       if (error.response) {
         const { status, data } = error.response;
-
         if (status === 401) {
           setErrorMsg(data.message || 'Invalid email or password');
         } else if (status === 500) {
@@ -77,20 +79,27 @@ function Login() {
           required
         />
 
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full mb-3 p-2 border rounded"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <div className="relative">
+          <input
+            type={showPassword ? 'text' : 'password'}
+            placeholder="Password"
+            className="w-full mb-3 p-2 border rounded pr-10"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button
+            type="button"
+            className="absolute right-2 top-2 text-sm text-blue-500"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? 'Hide' : 'Show'}
+          </button>
+        </div>
 
         <button
           type="submit"
-          className={`w-full p-2 rounded text-white ${
-            loading ? 'bg-gray-400' : 'bg-blue-500 hover:bg-blue-600'
-          }`}
+          className={`w-full p-2 rounded text-white ${loading ? 'bg-gray-400' : 'bg-blue-500 hover:bg-blue-600'}`}
           disabled={loading}
         >
           {loading ? 'Logging in...' : 'Login'}
@@ -98,12 +107,8 @@ function Login() {
 
         <p className="mt-3 text-sm text-center">
           Don't have an account?{" "}
-        <Link to="/register">
-          <span
-            className="text-blue-600 cursor-pointer hover:underline"
-          >
+          <Link to="/register" className="text-blue-600 hover:underline">
             Register
-          </span>
           </Link>
         </p>
       </form>

@@ -50,7 +50,6 @@ function Home() {
       .catch(err => console.error(err));
   }, []);
 
-
   useEffect(() => {
     const token = Cookies.get('token');
     axios.get(`http://localhost:3000/user/following/${currentUserEmail}`, {
@@ -107,6 +106,7 @@ function Home() {
         alert("No matching blogs found.");
       });
   };
+
   const sortedBlogs = blogs.slice().sort((a, b) => {
     if (sortOption === 'newest') {
       return new Date(b.created_at) - new Date(a.created_at);
@@ -117,7 +117,6 @@ function Home() {
     }
     return 0;
   });
-
 
   return (
     <div className="max-w-7xl mx-auto py-6 px-4">
@@ -157,7 +156,7 @@ function Home() {
           >
             🔍 Search
           </button>
-                    <select
+          <select
             value={sortOption}
             onChange={(e) => setSortOption(e.target.value)}
             className="border p-2 rounded"
