@@ -43,10 +43,6 @@ const response = await axios.post(
 { name, email, password },
 { withCredentials: true }
 );
-
-lua
-Copy
-Edit
   if (response.data?.userId) {
     setSuccessMsg("User registered successfully!");
     setName('');

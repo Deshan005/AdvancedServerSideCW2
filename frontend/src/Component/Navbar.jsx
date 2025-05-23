@@ -25,7 +25,7 @@ function Navbar() {
         <div className="h-full flex items-center">
           <Link
             to="/"
-            className={`text-xl font-bold text-blue-600 px-4 h-full flex items-center`}
+            className="text-xl font-bold text-blue-600 px-4 h-full flex items-center"
           >
             NaviTrails
           </Link>
@@ -52,7 +52,7 @@ function Navbar() {
               </button>
 
               {showDropdown && (
-                <div className="absolute right-0 mt-16 w-40 bg-white shadow-md rounded-md py-2 z-50">
+                <div className="absolute right-0 mt-40 w-40 bg-white shadow-md rounded-md py-2 z-50">
                   <Link
                     to="/profile"
                     className="block px-4 py-2 hover:bg-gray-100 text-gray-700 transition-colors duration-200"
