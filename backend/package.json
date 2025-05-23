@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Lasith456/advancedServerSideCW2.git"
+    "url": "https://github.com/Deshan005/AdvancedServerSideCW2.git"
   },
-  "author": "Lasith Chamika Viduranga",
+  "author": "Deshan Wijethunga",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Lasith456/advancedServerSideCW2/issues"
+    "url": "https://github.com/Deshan005/AdvancedServerSideCW2/issues"
   },
-  "homepage": "https://github.com/Lasith456/advancedServerSideCW2#readme",
+  "homepage": "https://github.com/Deshan005/AdvancedServerSideCW2#readme",
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
